@@ -1,11 +1,11 @@
-'use client'
-
-import Navbar from '@/components/ui/navbar';
+'use client';
+import Link from 'next/link'; 
+import NavBar from './components/NavBar';// Importando o componente Link do Next.js
 
 export default function Home() {
   return (
     <>
-      <Navbar/>
+    <NavBar/>
       <main className="container mx-auto px-4 mt-10 text-center relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/fundo-home.jpg')" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="relative z-10 py-20">
@@ -13,9 +13,9 @@ export default function Home() {
           <p className="text-lg mb-6 text-white">
             Agende partidas de futebol ou beach tennis com facilidade e rapidez.
           </p>
-          <a href="#services" className="bg-blue-900 hover:bg-blue-800 text-white px-6 py-3 rounded-lg text-lg">
+          <Link href="searchEstablishment" className="bg-blue-900 hover:bg-blue-800 text-white px-6 py-3 rounded-lg text-lg">
             Saiba Mais
-          </a>
+          </Link>
         </div>
       </main>
 
