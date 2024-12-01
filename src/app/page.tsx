@@ -1,42 +1,22 @@
 'use client';
 import { useState } from 'react';
-import Link from 'next/link'; // Importando o componente Link do Next.js
+import Link from 'next/link'; 
+import NavBar from './components/NavBar';// Importando o componente Link do Next.js
 
 export default function Home() {
   return (
     <>
-      <nav className="bg-gray-800 text-white">
-        <div className="container mx-auto px-4 flex items-center justify-between py-4">
-          <a className="text-xl font-bold" href="#">TocLoc</a>
-          <div className="space-x-4">
-            <a href="#home" className="hover:text-gray-300">Home</a>
-            <a href="#about" className="hover:text-gray-300">Sobre</a>
-            <a href="#services" className="hover:text-gray-300">Serviços</a>
-            <a href="#contact" className="hover:text-gray-300">Contato</a>
-            <Link href="/signin">
-              <button className="bg-blue-900   hover:bg-blue-800 text-white px-4 py-2 rounded">
-                Login
-              </button>
-            </Link>
-            <Link href="/signup">
-              <button className="bg-sky-100 hover:bg-sky-200 text-black px-4 py-2 rounded">
-                Cadastro
-              </button>
-            </Link>
-          </div>
-        </div>
-      </nav>
-
+    <NavBar/>
       <main className="container mx-auto px-4 mt-10 text-center relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/fundo-home.jpg')" }}>
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div> {/* Filtro de escurecimento */}
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="relative z-10 py-20">
           <h1 className="text-4xl font-bold mb-4 text-white">Reserve Seu Campo Online!</h1>
           <p className="text-lg mb-6 text-white">
             Agende partidas de futebol ou beach tennis com facilidade e rapidez.
           </p>
-          <a href="#services" className="bg-blue-900 hover:bg-blue-800 text-white px-6 py-3 rounded-lg text-lg">
+          <Link href="searchEstablishment" className="bg-blue-900 hover:bg-blue-800 text-white px-6 py-3 rounded-lg text-lg">
             Saiba Mais
-          </a>
+          </Link>
         </div>
       </main>
 
