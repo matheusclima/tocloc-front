@@ -61,7 +61,7 @@ export default function SearchEstablishment() {
       {/* Lista de Estabelecimentos */}
       <main className="container mx-auto px-6 mt-12">
         {filteredEstablishments.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer	">
             {filteredEstablishments.map((establishment) => (
               <div
                 key={establishment.id}
