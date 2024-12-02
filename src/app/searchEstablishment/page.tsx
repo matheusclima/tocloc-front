@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
-import NavBar from '../components/NavBar';
+import NavBar from '../../components/ui/navBar'
+import { useRouter } from 'next/navigation';
 
 
 const establishments = [
@@ -31,6 +32,11 @@ const establishments = [
 ];
 
 export default function SearchEstablishment() {
+  const router = useRouter();
+
+  const handleClick = (id: number) => {
+    router.push(`/establishments/${id}`);
+  };
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredEstablishments = establishments.filter((establishment) =>
@@ -58,7 +64,6 @@ export default function SearchEstablishment() {
         </div>
       </header>
 
-      {/* Lista de Estabelecimentos */}
       <main className="container mx-auto px-6 mt-12">
         {filteredEstablishments.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer	">
@@ -66,6 +71,7 @@ export default function SearchEstablishment() {
               <div
                 key={establishment.id}
                 className="bg-white rounded-lg shadow-lg hover:scale-105 transform transition duration-300"
+                onClick={() => handleClick(establishment.id)}
               >
                 <div className="p-6">
                   <h2 className="text-2xl font-bold text-gray-800 mb-2">
