@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import NavBar from '../components/NavBar';
+import { useRouter } from 'next/navigation';
 
 
 const establishments = [
@@ -31,6 +32,11 @@ const establishments = [
 ];
 
 export default function SearchEstablishment() {
+  const router = useRouter();
+
+  const handleClick = (id: number) => {
+    router.push(`/establishments/${id}`);
+  };
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredEstablishments = establishments.filter((establishment) =>
@@ -66,6 +72,7 @@ export default function SearchEstablishment() {
               <div
                 key={establishment.id}
                 className="bg-white rounded-lg shadow-lg hover:scale-105 transform transition duration-300"
+                onClick={() => handleClick(establishment.id)}
               >
                 <div className="p-6">
                   <h2 className="text-2xl font-bold text-gray-800 mb-2">
