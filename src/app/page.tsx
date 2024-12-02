@@ -1,11 +1,11 @@
 'use client';
-import { useState } from 'react';
 import Link from 'next/link'; 
-import NavBar from './components/NavBar';// Importando o componente Link do Next.js
+import NavBar from '../components/ui/navBar';
 
 export default function Home() {
   return (
     <>
+    <div className='bg-gray-900 text-white'>
     <NavBar/>
       <main className="container mx-auto px-4 mt-10 text-center relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/fundo-home.jpg')" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -54,7 +54,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="container mx-auto px-4 mt-20">
+      <div className='flex justify-between  container mx-auto'>
+      <section id="contact" className=" px-4 mt-20">
         <h2 className="text-3xl font-bold mb-4">Contato</h2>
         <p>Entre em contato conosco:</p>
         <ul className="list-disc pl-6">
@@ -63,10 +64,13 @@ export default function Home() {
           <li>Endereço: Rua do Esporte, 123, Fortaleza - CE</li>
         </ul>
       </section>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4722.479419099293!2d-38.480635924292464!3d-3.7687699433803674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c745fe9c03245d%3A0xd435fd5a6bfbbe44!2sUNIFOR%20-%20Universidade%20de%20Fortaleza!5e1!3m2!1spt-BR!2sbr!4v1733145121742!5m2!1spt-BR!2sbr" width="400" height="200" className=" px-4 mt-20"  loading="lazy" ></iframe>
+      </div>
 
       <footer className="bg-gray-800 text-white text-center py-4 mt-20">
         <p>&copy; 2024 TocLoc. Todos os direitos reservados.</p>
       </footer>
+      </div>
     </>
   );
 }

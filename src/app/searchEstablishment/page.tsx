@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import NavBar from '../components/NavBar';
+import NavBar from '../../components/ui/navBar'
 import { useRouter } from 'next/navigation';
 
 
@@ -64,7 +64,6 @@ export default function SearchEstablishment() {
         </div>
       </header>
 
-      {/* Lista de Estabelecimentos */}
       <main className="container mx-auto px-6 mt-12">
         {filteredEstablishments.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer	">
