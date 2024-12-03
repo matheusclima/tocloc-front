@@ -1,17 +1,19 @@
-import { cn } from "@/lib/utils";
+// import React from 'react';
 
-export interface CardProps {
-    children: React.ReactNode;
-    className?: string;
-}
+// interface CardProps {
+//   name: string;
+//   description: string;
+//   location: string;
+// }
 
-export default function Card({ children, className }: Readonly<CardProps>) {
-    return (
-        <div className={cn(
-            'bg-slate-200 shadow-lg rounded-lg p-6',
-            className
-        )}>
-            {children}
-        </div>
-    );
-}
+// const Card: React.FC<CardProps> = ({ name, description, location }) => {
+//   return (
+//     <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-sm p-4">
+//       <h2 className="text-xl font-bold text-gray-800">{name}</h2>
+//       <p className="text-gray-600 mt-2">{description}</p>
+//       <p className="text-gray-500 mt-4 italic">{location}</p>
+//     </div>
+//   );
+// };
+
+// export default Card;
