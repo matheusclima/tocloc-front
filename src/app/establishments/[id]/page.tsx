@@ -89,7 +89,7 @@ export default function EstablishmentDetail() {
                       <p className="mt-4 text-green-600">Reservado para: {field.selectedTime}</p>
                       <button
                         onClick={() => handleCancelReservation(field.id)}
-                        className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg"
+                        className="mt-4 bg-red-600 hover:bg-red-800 text-white px-4 py-2 rounded-lg"
                       >
                         Cancelar Reserva
                       </button>
@@ -97,7 +97,7 @@ export default function EstablishmentDetail() {
                   ) : (
                     <button
                       onClick={() => handleRentClick(field)}
-                      className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg"
+                      className="mt-4 bg-blue-900 hover:bg-blue-800 text-white px-4 py-2 rounded-lg"
                     >
                       Alugar
                     </button>
