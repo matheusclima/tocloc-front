@@ -38,13 +38,13 @@ const Modal: React.FC<ModalProps> = ({ field, onClose, onTimeSelect }) => {
           ))}
         </div>
         <div className="mt-6 flex justify-end space-x-2">
-          <button onClick={onClose} className="bg-red-500 text-white px-4 py-2 rounded-lg">
+          <button onClick={onClose} className="bg-red-600 hover:bg-red-800 text-white px-4 py-2 rounded-lg">
             Cancelar
           </button>
           <button
             onClick={() => onTimeSelect(selectedTime)}
             disabled={!selectedTime}
-            className="bg-green-500 text-white px-4 py-2 rounded-lg"
+            className="bg-blue-900 hover:bg-blue-800 text-white px-4 py-2 rounded-lg"
           >
             Confirmar
           </button>
