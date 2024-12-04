@@ -30,6 +30,10 @@ const fieldsData: EstablishmentFields = {
     { id: 1, name: 'Quadra 1', description: 'Quadra para beach tennis', price: 'R$ 60/h', rented: false, selectedTime: '' },
     { id: 2, name: 'Quadra 2', description: 'Quadra para futvôlei', price: 'R$ 50/h', rented: false, selectedTime: '' },
   ],
+  4: [
+    { id: 1, name: 'Quadra 1', description: 'Quadra para vôlei de praia', price: 'R$ 50/h', rented: false, selectedTime: '' },
+    { id: 2, name: 'Quadra 2', description: 'Quadra para futvôlei', price: 'R$ 70/h', rented: false, selectedTime: '' },
+  ],
 };
 
 export default function EstablishmentDetail() {
