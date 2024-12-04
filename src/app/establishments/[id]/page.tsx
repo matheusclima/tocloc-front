@@ -38,6 +38,14 @@ const fieldsData: EstablishmentFields = {
   ],
 };
 
+const reviews = [
+  { id: 1, user: 'Arthur Diogenes', rating: 5, comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+  { id: 2, user: 'Paulo Luan', rating: 3, comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+  { id: 3, user: 'Matheus Cavalcante', rating: 4, comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+  { id: 4, user: 'Juliane', rating: 2, comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+  { id: 5, user: 'Rodrigo Braga', rating: 5, comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+];
+
 export default function EstablishmentDetail() {
   const { id } = useParams();
   const [fields, setFields] = useState<Field[]>([]);
@@ -71,6 +79,18 @@ export default function EstablishmentDetail() {
         field.id === fieldId ? { ...field, rented: false, selectedTime: '' } : field
       )
     );
+  };
+
+  const renderStars = (rating: number) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <span key={i} className={i <= rating ? 'text-yellow-400' : 'text-gray-300'}>
+          ★
+        </span>
+      );
+    }
+    return stars;
   };
 
   return (
@@ -125,6 +145,22 @@ export default function EstablishmentDetail() {
         ) : (
           <p className="text-center text-gray-600 text-lg">Nenhum campo disponível encontrado.</p>
         )}
+
+        
+        <section className="mt-16">
+          <h2 className="text-3xl font-bold text-center mb-8">Opinião de quem já alugou:</h2>
+          <div className="space-y-6">
+            {reviews.map((review) => (
+              <div key={review.id} className="bg-white p-6 rounded-lg shadow-md">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-gray-800">{review.user}</h3>
+                  <div className="flex">{renderStars(review.rating)}</div>
+                </div>
+                <p className="text-gray-600">{review.comment}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
 
       {selectedField && (
