@@ -1,8 +1,7 @@
 'use client';
 import { useState } from 'react';
-import NavBar from '../../components/ui/navbar'
+import NavBar from '../../components/ui/navbar';
 import { useRouter } from 'next/navigation';
-
 
 const establishments = [
   {
@@ -33,11 +32,11 @@ const establishments = [
 
 export default function SearchEstablishment() {
   const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleClick = (id: number) => {
     router.push(`/establishments/${id}`);
   };
-  const [searchTerm, setSearchTerm] = useState('');
 
   const filteredEstablishments = establishments.filter((establishment) =>
     `${establishment.name} ${establishment.description} ${establishment.location}`
@@ -47,7 +46,7 @@ export default function SearchEstablishment() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <NavBar/>
+      <NavBar />
       <header className="bg-gray-800 py-16 text-center text-white">
         <h1 className="text-4xl font-bold mb-4">Encontre o Local Perfeito</h1>
         <p className="text-lg mb-6">
@@ -57,7 +56,7 @@ export default function SearchEstablishment() {
           <input
             type="text"
             placeholder="Digite o nome do esporte, estabelecimento ou localização..."
-            className="w-full p-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+            className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black shadow-md"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -66,19 +65,22 @@ export default function SearchEstablishment() {
 
       <main className="container mx-auto px-6 mt-12">
         {filteredEstablishments.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer	">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredEstablishments.map((establishment) => (
               <div
                 key={establishment.id}
-                className="bg-white rounded-lg shadow-lg hover:scale-105 transform transition duration-300"
+                className="bg-white rounded-xl shadow-lg hover:scale-105 transform transition duration-300 cursor-pointer"
                 onClick={() => handleClick(establishment.id)}
               >
                 <div className="p-6">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                    {establishment.name}
-                  </h2>
-                  <p className="text-gray-600">{establishment.description}</p>
-                  <p className="text-gray-500 mt-4">📍 {establishment.location}</p>
+                  <h2 className="text-2xl font-semibold text-gray-800 mb-3">{establishment.name}</h2>
+                  <p className="text-gray-600 text-sm mb-3">{establishment.description}</p>
+                  <div className="flex items-center text-gray-500 mt-4">
+                    <span role="img" aria-label="location" className="mr-2">
+                      📍
+                    </span>
+                    {establishment.location}
+                  </div>
                 </div>
               </div>
             ))}
@@ -89,7 +91,6 @@ export default function SearchEstablishment() {
           </p>
         )}
       </main>
-
     </div>
   );
 }
