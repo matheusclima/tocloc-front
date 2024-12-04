@@ -15,7 +15,7 @@ export default function Home() {
             Agende partidas de futebol ou beach tennis com facilidade e rapidez.
           </p>
           <Link href="searchEstablishment" className="bg-blue-900 hover:bg-blue-800 text-white px-6 py-3 rounded-lg text-lg">
-            Saiba Mais
+            Faça sua reserva!
           </Link>
         </div>
       </main>
