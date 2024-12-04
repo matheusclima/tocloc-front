@@ -9,7 +9,7 @@ const establishments = [
     id: 1,
     name: 'No Alvo',
     location: 'Fortaleza, CE',
-    description: 'Uma excelente local para se divertir com os amigos.',
+    description: 'Variedade de locais para a prática de esportiva como futebol Society e Beach Tennis.',
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const establishments = [
     id: 4,
     name: 'Mesa Farta',
     location: 'Rio de Janeiro, RJ',
-    description: 'Ideal para paridas de Vôlei de praia e Futvôlei.',
+    description: 'Ideal para partidas de Vôlei de praia e Futvôlei.',
   },
 ];
 
@@ -56,7 +56,7 @@ export default function SearchEstablishment() {
         <div className="max-w-2xl mx-auto">
           <input
             type="text"
-            placeholder="Digite o nome do estabelecimento ou localização..."
+            placeholder="Digite o nome do esporte, estabelecimento ou localização..."
             className="w-full p-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
