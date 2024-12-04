@@ -1,8 +1,10 @@
 'use client';
+
 import { useState, useEffect } from 'react';
-import NavBar from '../../../components/ui/navBar';
+import NavBar from '../../../components/ui/navbar';
 import { useParams } from 'next/navigation';
 import Modal from '../../../components/ui/modal';
+import { ArrowLeft } from 'lucide-react';
 
 interface Field {
   id: number;
@@ -74,6 +76,16 @@ export default function EstablishmentDetail() {
   return (
     <div className="min-h-screen bg-gray-100">
       <NavBar />
+
+      {/* Botão de retornar */}
+      <button
+        onClick={() => window.history.back()}
+        className="absolute top-4 left-4 bg-gray-800 text-white p-2 rounded-full flex items-center hover:bg-gray-700"
+        aria-label="Voltar"
+      >
+        <ArrowLeft className="w-6 h-6" />
+      </button>
+
       <header className="bg-gray-800 py-16 text-center text-white">
         <h1 className="text-4xl font-bold mb-4">Campos Disponíveis</h1>
         <p className="text-lg mb-6">Selecione um campo para fazer sua reserva.</p>
