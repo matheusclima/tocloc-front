@@ -97,7 +97,7 @@ export default function EstablishmentDetail() {
     <div className="min-h-screen bg-gray-100">
       <NavBar />
 
-      {/* Botão de retornar */}
+      
       <button
         onClick={() => window.history.back()}
         className="absolute top-4 left-4 bg-gray-800 text-white p-2 rounded-full flex items-center hover:bg-gray-700"
