@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link'; 
-import NavBar from '../components/ui/navBar';
+import NavBar from '../components/ui/navbar';
 
 export default function Home() {
   return (
@@ -23,7 +23,11 @@ export default function Home() {
       <section id="about" className="container mx-auto px-4 mt-20">
         <h2 className="text-3xl font-bold mb-4">Sobre Nós</h2>
         <p>
-          A TocLoc oferece uma plataforma fácil para reservar campos e quadras esportivas. Seja futebol, beach tennis ou eventos, temos o espaço ideal para você.
+          A TocLoc é a sua parceira ideal na hora de reservar campos e quadras esportivas com praticidade e rapidez. Nossa plataforma foi criada para conectar apaixonados por esportes a espaços perfeitos para jogar futebol, beach tennis, vôlei e muito mais.
+        </p>
+        <br />
+        <p>
+        Seja para um jogo com os amigos, treinos regulares ou celebrações únicas, a TocLoc está aqui para garantir que você encontre o lugar ideal de forma simples e confiável.
         </p>
       </section>
 
