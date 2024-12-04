@@ -105,8 +105,8 @@ export default function EstablishmentDetail() {
       </button>
 
       <header className="bg-gray-800 py-16 text-center text-white">
-        <h1 className="text-4xl font-bold mb-4">Campos Disponíveis</h1>
-        <p className="text-lg mb-6">Selecione um campo para fazer sua reserva.</p>
+        <h1 className="text-4xl font-bold mb-4">Locais Disponíveis</h1>
+        <p className="text-lg mb-6">Selecione um local e horário para fazer sua reserva.</p>
       </header>
 
       <main className="container mx-auto px-6 mt-12">
