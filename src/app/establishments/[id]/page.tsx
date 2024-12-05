@@ -27,7 +27,6 @@ export default function EstablishmentDetail() {
   useEffect(() => {
     const getEstablishment = async () => {
       try {
-        console.log(id)
         const response = await api.get(`/estabelecimentos/${id}`);
         setFields(response.data.campos);
       } catch (error) {
@@ -48,6 +47,17 @@ export default function EstablishmentDetail() {
     }
     return stars;
   };
+
+  const handleRentClick = (fieldId: number) => {
+    const storedUser = localStorage.getItem('usuario');
+    const usuario = storedUser ? JSON.parse(storedUser) : null;
+    if (!usuario || usuario.tipo === 'visitante') {
+      window.location.href = '/signin';
+      return;
+    }
+    setSelectedField(fieldId);
+    setIsOpen(true);
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -74,10 +84,8 @@ export default function EstablishmentDetail() {
                   <h2 className="text-2xl font-bold text-gray-800 mb-2">{field.nome}</h2>
                   <p className="text-gray-600">{field.tipo}</p>
                   <p className="text-gray-500 my-4">R$ {field.valor}/h</p>
-                  <Button onClick={() => {
-                    setSelectedField(field.id)
-                    setIsOpen(true)
-                  }} className="text-white px-4 py-2 rounded-lg">
+                  <Button onClick={() => handleRentClick(field.id)}
+                    className="text-white px-4 py-2 rounded-lg">
                     Alugar
                   </Button>
                 </div>
@@ -108,7 +116,7 @@ export default function EstablishmentDetail() {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       >
-        <CriarReservaForm setIsOpen={setIsOpen}campoId={selectedField}/>
+        <CriarReservaForm setIsOpen={setIsOpen} campoId={selectedField} />
       </FormDialog>
     </div>
   );

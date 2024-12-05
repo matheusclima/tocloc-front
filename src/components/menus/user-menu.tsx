@@ -10,7 +10,6 @@ export default function UserMenu() {
     const usuario = JSON.parse(localStorage.getItem('usuario')!);
 
     const handleLogout = () => {
-        console.log('logout');
         localStorage.removeItem('usuario');
         router.push('/');
     }

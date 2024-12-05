@@ -6,7 +6,6 @@ import { toast } from "sonner";
 
 const EditProfile: React.FC = () => {
   const usuario = JSON.parse(localStorage.getItem('usuario')!);
-  console.log(usuario);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -26,7 +25,6 @@ const EditProfile: React.FC = () => {
     }
     try {
       const response = await api.put(`/usuarios/${usuario.id}`, body);
-      console.log(response)
       if(response.status === 200) {
         toast.success('Perfil atualizado com sucesso!');
         localStorage.setItem('usuario', JSON.stringify(response.data));

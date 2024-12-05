@@ -15,7 +15,6 @@ export default function SignIn() {
             const response = await api.post('/auth/login', {
                 email, senha
             });
-            console.log(response);
             if (response.status === 201) {
                 toast.success('Login efetuado com sucesso');
                 localStorage.setItem('usuario', JSON.stringify(response.data));

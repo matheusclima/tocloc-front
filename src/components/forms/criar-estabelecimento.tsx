@@ -32,7 +32,6 @@ export default function CriarEstabelecimentoForm({ setIsOpen }: { setIsOpen: Dis
         }
         try {
             const response = await api.post('/estabelecimentos', body);
-            console.log(response);
             if (response.status === 201) {
                 toast.success('Estabelecimento criado com sucesso!');
                 setIsOpen(false);

@@ -22,7 +22,6 @@ export default function TabelaDeEstabelecimentos() {
         const getEstablishments = async () => {
             try {
                 const response = await api.get(`/usuarios/${id}/estabelecimentos`);
-                console.log(response);
                 setEstabelecimentos(response.data);
             } catch (error) {
                 console.error(error);
