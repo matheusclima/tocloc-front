@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="h-screen bg-black">
+    <div className="flex flex-col h-screen bg-black">
         <Navbar/>
         {children}
     </div>

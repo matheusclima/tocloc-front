@@ -1,6 +1,6 @@
 'use client'
 
-import { Reservation } from "@/app/types/types";
+import { Reservation } from "@/types/types";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
 import { Button } from "../ui/button";
 import { Calendar, CircleAlert, CircleCheck, CircleX, Clock, Pencil, Trash2 } from "lucide-react";

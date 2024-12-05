@@ -5,6 +5,8 @@ import NavBar from '../../../components/ui/navbar';
 import { useParams } from 'next/navigation';
 import Modal from '../../../components/ui/modal';
 import { ArrowLeft } from 'lucide-react';
+import api from '@/lib/api';
+import { Campo } from '@/types/types';
 
 interface Field {
   id: number;
@@ -48,19 +50,22 @@ const reviews = [
 
 export default function EstablishmentDetail() {
   const { id } = useParams();
-  const [fields, setFields] = useState<Field[]>([]);
-  const [selectedField, setSelectedField] = useState<Field | null>(null);
+  const [fields, setFields] = useState<Campo[]>([]);
+  const [selectedField, setSelectedField] = useState<Campo | null>(null);
 
   useEffect(() => {
-    if (id && typeof id === 'string') {
-      const fieldsForEstablishment = fieldsData[parseInt(id)];
-      if (fieldsForEstablishment) {
-        setFields(fieldsForEstablishment);
+    const getEstablishment = async () => {
+      try {
+        const response = await api.get(`/estabelecimentos/${id}`);
+        setFields(response.data.campos);
+      } catch (error) {
+        console.error(error);
       }
     }
+    getEstablishment();
   }, [id]);
 
-  const handleRentClick = (field: Field) => {
+  const handleRentClick = (field: Campo) => {
     setSelectedField(field);
   };
 
@@ -115,9 +120,9 @@ export default function EstablishmentDetail() {
             {fields.map((field) => (
               <div key={field.id} className="bg-white rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl">
                 <div className="p-6">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-2">{field.name}</h2>
-                  <p className="text-gray-600">{field.description}</p>
-                  <p className="text-gray-500 mt-4">{field.price}</p>
+                  <h2 className="text-2xl font-bold text-gray-800 mb-2">{field.nome}</h2>
+                  <p className="text-gray-600">{field.tipo}</p>
+                  <p className="text-gray-500 mt-4">R$ {field.valor}/h</p>
                   {field.rented ? (
                     <>
                       <p className="mt-4 text-green-600">Reservado para: {field.selectedTime}</p>

@@ -1,45 +1,34 @@
 'use client';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import NavBar from '../../components/ui/navbar';
 import { useRouter } from 'next/navigation';
-
-const establishments = [
-  {
-    id: 1,
-    name: 'No Alvo',
-    location: 'Fortaleza, CE',
-    description: 'Variedade de locais para a prática de esportiva como futebol Society e Beach Tennis.',
-  },
-  {
-    id: 2,
-    name: 'Arena Champions',
-    location: 'Fortaleza, CE',
-    description: 'Local perfeito para futebol society.',
-  },
-  {
-    id: 3,
-    name: 'Arena 085',
-    location: 'Fortaleza, CE',
-    description: 'Ideal para partidas de Beach Tennis e Futvôlei.',
-  },
-  {
-    id: 4,
-    name: 'Mesa Farta',
-    location: 'Rio de Janeiro, RJ',
-    description: 'Ideal para partidas de Vôlei de praia e Futvôlei.',
-  },
-];
+import { Estabelecimento } from '@/types/types';
+import api from '@/lib/api';
 
 export default function SearchEstablishment() {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
+  const [establishments, setEstablishments] = useState<Estabelecimento[]>([]);
+
+  useEffect(() => {
+    const getEstablishments = async () => {
+      try {
+        const response = await api.get('/estabelecimentos');
+        setEstablishments(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getEstablishments();
+  }, []);
 
   const handleClick = (id: number) => {
     router.push(`/establishments/${id}`);
   };
 
   const filteredEstablishments = establishments.filter((establishment) =>
-    `${establishment.name} ${establishment.description} ${establishment.location}`
+    `${establishment.nome} ${establishment.descricao} ${establishment.endereco?.cidade}`
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
   );
@@ -73,13 +62,13 @@ export default function SearchEstablishment() {
                 onClick={() => handleClick(establishment.id)}
               >
                 <div className="p-6">
-                  <h2 className="text-2xl font-semibold text-gray-800 mb-3">{establishment.name}</h2>
-                  <p className="text-gray-600 text-sm mb-3">{establishment.description}</p>
+                  <h2 className="text-2xl font-semibold text-gray-800 mb-3">{establishment.nome}</h2>
+                  <p className="text-gray-600 text-sm mb-3">{establishment.descricao}</p>
                   <div className="flex items-center text-gray-500 mt-4">
                     <span role="img" aria-label="location" className="mr-2">
                       📍
                     </span>
-                    {establishment.location}
+                    {establishment.endereco?.cidade}
                   </div>
                 </div>
               </div>

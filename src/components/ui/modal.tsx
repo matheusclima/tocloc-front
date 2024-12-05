@@ -1,3 +1,4 @@
+import { Campo } from '@/types/types';
 import React, { useState } from 'react';
 
 interface Field {
@@ -10,7 +11,7 @@ interface Field {
 }
 
 interface ModalProps {
-  field: Field;
+  field: Campo;
   onClose: () => void;
   onTimeSelect: (time: string) => void;
 }
@@ -23,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({ field, onClose, onTimeSelect }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-xl font-bold mb-4">{field.name} - Selecione o Horário</h2>
+        <h2 className="text-xl font-bold mb-4">{field.nome} - Selecione o Horário</h2>
         <div className="space-y-2">
           {times.map((time) => (
             <button
