@@ -36,7 +36,7 @@ export default function SignUp() {
     return (
         <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
             <div className="flex items-center p-4 bg-white rounded-xl w-full max-w-4xl shadow-lg overflow-hidden">
-                {/* Imagem com comportamento responsivo */}
+                
                 <div className="hidden lg:block w-1/2">
                     <Image
                         src="/images/field1.jpg"
@@ -47,7 +47,7 @@ export default function SignUp() {
                     />
                 </div>
 
-                {/* Formulário */}
+                
                 <div className="bg-white p-8 w-full lg:w-1/2 relative">
                     <Link href="/" className="text-gray-800 flex items-center mb-6 absolute -top-16 left-4">
                         <ArrowLeft className="mr-2" /> Voltar para Home

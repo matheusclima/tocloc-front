@@ -18,10 +18,13 @@ export default function ForgotPassword() {
             <Head>
                 <title>Esqueci minha senha</title>
             </Head>
-            <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-                <div className="flex items-center p-4 bg-white rounded-xl w-3/5">
-                    <Image src="/images/field1.jpg" alt="Tocloc" width={600} height={400} className="rounded-xl" />
-                    <div className="bg-white p-8 rounded-lg max-w-md w-full relative">
+            <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4">
+                <div className="flex flex-col lg:flex-row items-center p-4 bg-white rounded-xl w-full max-w-4xl">
+                    
+                    <div className="hidden lg:block w-1/2">
+                        <Image src="/images/field1.jpg" alt="Tocloc" width={600} height={400} className="rounded-xl" />
+                    </div>
+                    <div className="bg-white p-8 rounded-lg w-full lg:w-1/2">
                         <Link href="/" className="text-gray-800 flex items-center mb-6 absolute -top-16 left-4">
                             <ArrowLeft className="mr-2" /> Voltar para Home
                         </Link>
