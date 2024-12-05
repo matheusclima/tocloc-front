@@ -3,42 +3,12 @@
 import { useState, useEffect } from 'react';
 import NavBar from '../../../components/ui/navbar';
 import { useParams } from 'next/navigation';
-import Modal from '../../../components/ui/modal';
 import { ArrowLeft } from 'lucide-react';
 import api from '@/lib/api';
 import { Campo } from '@/types/types';
-
-interface Field {
-  id: number;
-  name: string;
-  description: string;
-  price: string;
-  rented: boolean;
-  selectedTime: string;
-}
-
-interface EstablishmentFields {
-  [key: number]: Field[];
-}
-
-const fieldsData: EstablishmentFields = {
-  1: [
-    { id: 1, name: 'Campo 1', description: 'Campo para futebol society', price: 'R$ 100/h', rented: false, selectedTime: '' },
-    { id: 2, name: 'Campo 2', description: 'Campo para beach tennis', price: 'R$ 80/h', rented: false, selectedTime: '' },
-  ],
-  2: [
-    { id: 1, name: 'Campo A', description: 'Campo para futebol society', price: 'R$ 120/h', rented: false, selectedTime: '' },
-    { id: 2, name: 'Campo B', description: 'Campo para futvôlei', price: 'R$ 90/h', rented: false, selectedTime: '' },
-  ],
-  3: [
-    { id: 1, name: 'Quadra 1', description: 'Quadra para beach tennis', price: 'R$ 60/h', rented: false, selectedTime: '' },
-    { id: 2, name: 'Quadra 2', description: 'Quadra para futvôlei', price: 'R$ 50/h', rented: false, selectedTime: '' },
-  ],
-  4: [
-    { id: 1, name: 'Quadra 1', description: 'Quadra para vôlei de praia', price: 'R$ 50/h', rented: false, selectedTime: '' },
-    { id: 2, name: 'Quadra 2', description: 'Quadra para futvôlei', price: 'R$ 70/h', rented: false, selectedTime: '' },
-  ],
-};
+import FormDialog from '@/components/ui/form-dialog';
+import CriarReservaForm from '@/components/forms/criar-reserva';
+import { Button } from '@/components/ui/button';
 
 const reviews = [
   { id: 1, user: 'Arthur Diogenes', rating: 5, comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
@@ -51,11 +21,13 @@ const reviews = [
 export default function EstablishmentDetail() {
   const { id } = useParams();
   const [fields, setFields] = useState<Campo[]>([]);
-  const [selectedField, setSelectedField] = useState<Campo | null>(null);
+  const [selectedField, setSelectedField] = useState<number>(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const getEstablishment = async () => {
       try {
+        console.log(id)
         const response = await api.get(`/estabelecimentos/${id}`);
         setFields(response.data.campos);
       } catch (error) {
@@ -64,27 +36,6 @@ export default function EstablishmentDetail() {
     }
     getEstablishment();
   }, [id]);
-
-  const handleRentClick = (field: Campo) => {
-    setSelectedField(field);
-  };
-
-  const handleTimeSelection = (time: string) => {
-    setFields((prevFields) =>
-      prevFields.map((field) =>
-        field.id === selectedField?.id ? { ...field, rented: true, selectedTime: time } : field
-      )
-    );
-    setSelectedField(null);
-  };
-
-  const handleCancelReservation = (fieldId: number) => {
-    setFields((prevFields) =>
-      prevFields.map((field) =>
-        field.id === fieldId ? { ...field, rented: false, selectedTime: '' } : field
-      )
-    );
-  };
 
   const renderStars = (rating: number) => {
     const stars = [];
@@ -110,7 +61,7 @@ export default function EstablishmentDetail() {
       </button>
 
       <header className="bg-gray-800 py-16 text-center text-white">
-        <h1 className="text-4xl font-bold mb-4">Locais Disponíveis</h1>
+        <h1 className="text-4xl font-bold mb-4">Campos Disponíveis</h1>
         <p className="text-lg mb-6">Selecione um local e horário para fazer sua reserva.</p>
       </header>
 
@@ -122,25 +73,13 @@ export default function EstablishmentDetail() {
                 <div className="p-6">
                   <h2 className="text-2xl font-bold text-gray-800 mb-2">{field.nome}</h2>
                   <p className="text-gray-600">{field.tipo}</p>
-                  <p className="text-gray-500 mt-4">R$ {field.valor}/h</p>
-                  {field.rented ? (
-                    <>
-                      <p className="mt-4 text-green-600">Reservado para: {field.selectedTime}</p>
-                      <button
-                        onClick={() => handleCancelReservation(field.id)}
-                        className="mt-4 bg-red-600 hover:bg-red-800 text-white px-4 py-2 rounded-lg"
-                      >
-                        Cancelar Reserva
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      onClick={() => handleRentClick(field)}
-                      className="mt-4 bg-blue-900 hover:bg-blue-800 text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
-                    >
-                      Alugar
-                    </button>
-                  )}
+                  <p className="text-gray-500 my-4">R$ {field.valor}/h</p>
+                  <Button onClick={() => {
+                    setSelectedField(field.id)
+                    setIsOpen(true)
+                  }} className="text-white px-4 py-2 rounded-lg">
+                    Alugar
+                  </Button>
                 </div>
               </div>
             ))}
@@ -164,14 +103,13 @@ export default function EstablishmentDetail() {
           </div>
         </section>
       </main>
-
-      {selectedField && (
-        <Modal
-          field={selectedField}
-          onClose={() => setSelectedField(null)}
-          onTimeSelect={handleTimeSelection}
-        />
-      )}
+      <FormDialog
+        title="Adicionar Reserva"
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      >
+        <CriarReservaForm setIsOpen={setIsOpen}campoId={selectedField}/>
+      </FormDialog>
     </div>
   );
 }

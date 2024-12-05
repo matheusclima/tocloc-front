@@ -9,10 +9,13 @@ import CriarEstabelecimentoForm from "../forms/criar-estabelecimento";
 import { useParams } from "next/navigation";
 import { Edit, Trash2 } from "lucide-react";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
+import CriarCampoForm from "../forms/criar-campo";
 
 export default function TabelaDeEstabelecimentos() {
     const [estabelecimentos, setEstabelecimentos] = useState<Estabelecimento[]>([])
-    const [isOpen, setIsOpen] = useState(false);
+    const [isEstabelecimentoOpen, setIsEstabelecimentoOpen] = useState(false);
+    const [isCampoOpen, setIsCampoOpen] = useState(false);
+    const [estabelecimentoId, setEstabelecimentoId] = useState<number>(0);
     const { id } = useParams();
 
     useEffect(() => {
@@ -40,21 +43,31 @@ export default function TabelaDeEstabelecimentos() {
     return (
         <>
             <FormDialog
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
+                isOpen={isEstabelecimentoOpen}
+                setIsOpen={setIsEstabelecimentoOpen}
                 title="Adicionar Estabelecimento"
                 description="Adicione um novo estabelecimento ao sistema. Defina também seus campos."
             >
-                <CriarEstabelecimentoForm setIsOpen={setIsOpen}/>
+                <CriarEstabelecimentoForm setIsOpen={setIsEstabelecimentoOpen} />
             </FormDialog>
+
+            <FormDialog
+                isOpen={isCampoOpen}
+                setIsOpen={setIsCampoOpen}
+                title="Adicionar Campo"
+                description="Adicione um novo campo ao estabelecimento selecionado."
+            >
+                <CriarCampoForm setIsOpen={setIsCampoOpen} id={estabelecimentoId}/>
+            </FormDialog>
+
             <Button
                 className="mb-4"
-                onClick={() => setIsOpen(true)}>
+                onClick={() => setIsEstabelecimentoOpen(true)}>
                 Adicionar Estabelecimento
             </Button>
             <ul>
                 {estabelecimentos.map((estabelecimento) => (
-                    <li className="border p-4 rounded-xl bg-[#f9f9f9] text-gray-800 mb-4"
+                    <li className="border p-4 rounded-xl bg-slate-300 text-gray-800 mb-4"
                         key={estabelecimento.id}>
                         <div className="flex justify-between gap-auto">
                             <div>
@@ -62,8 +75,18 @@ export default function TabelaDeEstabelecimentos() {
                                 <p>{estabelecimento.descricao}</p>
                                 <p>Contato: {estabelecimento.telefone}</p>
                                 <p>Endereço: {estabelecimento.endereco.rua}, {estabelecimento.endereco.numero} - {estabelecimento.endereco.bairro}</p>
+                                <p>Quantidade de Campos Registrados: {estabelecimento.campos.length}</p>
                             </div>
                             <div className="flex items-center gap-1">
+                                <Button
+                                    className="mb-4 ml-4"
+                                    onClick={() => {
+                                        setEstabelecimentoId(estabelecimento.id)
+                                        setIsCampoOpen(true)
+                                    }}
+                                >
+                                    Adicionar Campo
+                                </Button>
                                 <Button variant={'ghost'}>
                                     <Edit className="w-6 h-6 text-blue-700" />
                                 </Button>

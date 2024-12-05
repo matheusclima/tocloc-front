@@ -30,21 +30,14 @@ export class Campo {
     }
 }
 
-export class Reservation {
+export class Reserva {
     id: number;
-    fieldId: number;
-    userId: number;
-    startTime: Date;
-    endTime: Date;
-    status: 'pending' | 'confirmed' | 'cancelled';
-    constructor(id: number, fieldId: number, userId: number, startTime: Date, endTime: Date, status: 'pending' | 'confirmed' | 'cancelled') {
-        this.id = id;
-        this.fieldId = fieldId;
-        this.userId = userId;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.status = status;
-    }
+    data: Date;
+    usuario: Usuario;
+    horarioInicio: Date;
+    horarioFim: Date;
+    status: 'pendente' | 'confirmada' | 'cancelada';
+    campo: Campo;
 }
 
 export class Endereco {
